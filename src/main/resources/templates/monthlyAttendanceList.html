@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous">
+    <br/>
+    <br/>
+    <title>Monthly Attendance List</title>
+    </div>
+
+    <style>
+    .error {
+        color: red;
+    }
+</style>
+</head>
+<body>
+
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Employee Id</th>
+        <th>Month</th>
+        <th>Year</th>
+        <th>Total</th>
+        <th>Lop</th>
+        <th>Present</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${monthlyAttendanceDTO}" var="attendance">
+        <tr>
+            <td>${attendance.id}</td>
+            <td>${attendance.month}</td>
+            <td>${attendance.year}</td>
+            <td>${attendance.total}</td>
+            <td>${attendance.lop}</td>
+            <td>${attendance.present}</td>
+
+        </tr>
+    </c:forEach>
+<!--    <tr>-->
+<!--        <td>John</td>-->
+<!--        <td>Doe</td>-->
+<!--        <td>john@example.com</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td>Mary</td>-->
+<!--        <td>Moe</td>-->
+<!--        <td>mary@example.com</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td>July</td>-->
+<!--        <td>Dooley</td>-->
+<!--        <td>july@example.com</td>-->
+<!--    </tr>-->
+    </tbody>
+</table>
+
+</body>
+</html>

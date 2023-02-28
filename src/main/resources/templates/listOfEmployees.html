@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous">
+    <br/>
+    <br/>
+    <title>Employee List</title>
+    </div>
+
+    <style>
+    .error {
+        color: red;
+    }
+</style>
+</head>
+<body>
+
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Employee Id</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Designation</th>
+        <th>Department</th>
+        <th>Operation</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee:${employeeList}">
+
+            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.age}"></td>
+            <td th:text="${employee.designation}"></td>
+            <td th:text="${employee.department}"></td>
+        <td><a th:href="@{/update(id=${employee.id})}"  class="btn btn-info btn-sm " >Update</a>
+            <a th:href="@{/delete/{id}(id = ${employee.id})}" class="btn btn-danger btn-sm">Delete</a>
+        <a href="@{/attendance(id=${employee.id})}" class="btn btn-outline-primary btn-sm">Record</a>
+            <a th:href="@{/attendanceForm/(id=${employee.id})}" class="btn btn-outline-success btn-sm">Mark</a>
+
+        </td>
+
+    </tr>
+
+    <!--    <tr>-->
+    <!--        <td>John</td>-->
+    <!--        <td>Doe</td>-->
+    <!--        <td>john@example.com</td>-->
+    <!--    </tr>-->
+    <!--    <tr>-->
+    <!--        <td>Mary</td>-->
+    <!--        <td>Moe</td>-->
+    <!--        <td>mary@example.com</td>-->
+    <!--    </tr>-->
+    <!--    <tr>-->
+    <!--        <td>July</td>-->
+    <!--        <td>Dooley</td>-->
+    <!--        <td>july@example.com</td>-->
+    <!--    </tr>-->
+    </tbody>
+</table>
+
+</body>
+</html>

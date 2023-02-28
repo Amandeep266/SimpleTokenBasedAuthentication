@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+          crossorigin="anonymous">
+    <br/>
+    <br/>
+    <title>Add Attendance</title>
+    </div>
+
+    <style>
+    .error {
+        color: red;
+    }
+</style>
+    <script type="text/javascript">
+     function formatDate()
+     {
+     let date=document.getElementById("attendancedate");
+     let formatedDate=date.format('DD-MM-YYYY');
+     date.value=formatedDate;
+
+     }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h3 class="h3 mb-4">Mark Attendance</h3>
+    <hr>
+
+    <form action="#" th:action="@{/addAttendance}" th:object=${attendance}  style="width:60%;"
+          METHOD="POST" >
+        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+            <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+        </div>
+        <div class="form-row">
+        <input type="hidden" th:value="${attendance.id}" name="id" />
+<!--                <div class="input-group date col-md-4 mb-3">-->
+<!--                    <input data-provide="datepicker"/>-->
+<!--                        <span class="glyphicon glyphicon-th">Date</span>-->
+
+<!--                </div>-->
+<!--            <div class="input-group date col-md-4 mb-3" >-->
+<!--                <input  type="text" class="form-control" placeholder="dd.mm.yyyy">-->
+<!--                <div class="input-group-append">-->
+<!--                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>-->
+<!--                </div>-->
+<!--            </div>-->
+
+                <div class="col-md-4 mb-3">
+                    <label for="attendancedate">Date</label>
+                    <div class="input-group">
+                        <input type="date"  pattern="DD-MM-YYYY" class="form-control" id="attendancedate"   th:field="${attendance.dateOfAttendanceMark}" />
+<!--                        <div class="input-group-prepend">-->
+<!--                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>-->
+<!--                        </div>-->
+
+                    </div>
+                </div>
+            <div class="col-md-4 mb-2">
+                <label for="validationCustom02">Hours</label>
+                <input type="number" class="form-control" id="validationCustom02" th:field="${attendance.numberOfHours}" placeholder="Hours"  min=0 max=24  required />
+            </div>
+
+
+        </div>
+        <div class="form-row " style="margin-left:10rem">
+        <button type="submit" class="btn btn-info sm-3">Mark</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

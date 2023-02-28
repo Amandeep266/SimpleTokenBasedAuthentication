@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous">
+    <br/>
+    <br/>
+    <title>Add New Employee</title>
+    </div>
+
+    <style>
+    .error {
+        color: red;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h3 class="h3 mb-4">Add Employee</h3>
+    <hr>
+
+    <form action="#" th:action="@{/confirm}" th:object=${employee}  style="width:60%;"
+       METHOD="POST" >
+        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+            <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+        </div>
+        <input type="hidden" th:value="${employee.id}" name="id" />
+
+        <div class="input-group mb-5">
+            <div class="input-group-prepend">
+                <span class="input-group-text" >Name</span>
+            </div>
+            <input type="text" th:field="*{name}"class="form-control"   aria-describedby="basic-addon1"/>
+
+
+        </div>
+        <div class="input-group mb-5">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Age</span>
+            </div>
+            <input type="number" th:field="*{age}" class="form-control"  aria-describedby="basic-addon1"/>
+        </div>
+
+        <div class="input-group mb-5">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Department</label>
+            </div>
+            <select  th:field="*{department}" class="custom-select" id="inputGroupSelect01"  onchange="makeSubmenu()"   >
+                <option  selected value=""  > </option>
+                <option  value="HR">HR</option>
+                <option value="IT">IT</option>
+                <option value="FINANCE">FINANCE</option>
+                <option value="NETWORKING">NETWORKING</option>
+            </select>
+        </div>
+        <div class="input-group mb-5">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="categorySelect">Designation</label>
+            </div>
+            <select th:field="*{designation}" class="custom-select" id="categorySelect">
+                <option  selected  value="" th:text="*{designation}"></option>
+
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-info col-4">Confirm</button>
+    </form>
+    <br/>
+    <br/>
+
+
+
+
+    <script>
+
+     function makeSubmenu()
+ {
+ value = document.getElementById('inputGroupSelect01').value;
+
+ var departments={
+        "HR":["Operation Manager"],
+        "IT":["SDE"],
+        "FINANCE":["Manager"],
+        "NETWORKING":["Network Analyst"]
+        };
+
+ console.log(departments);
+let select = document.getElementById("categorySelect");
+ while (select.options.length) {
+        select.remove(0);
+    }
+
+ for(let i = 0 ; i<departments[value].length ; i++){
+    let option = document.createElement('option');
+    option.setAttribute("value", departments[value][i]);
+    let text = document.createTextNode(departments[value][i]);
+    option.innerHtml = "option"+i+1;
+    option.appendChild(text);
+    select.appendChild(option);
+
+ }
+
+
+        console.log("value is "+value);
+<!--         if (value.length == 0) document.getElementById("categorySelect").innerHTML = "<option>abc</option>";-->
+<!--            else {-->
+<!--                var citiesOptions = "";-->
+<!--                for (designation in departments[value]) {-->
+<!--                    citiesOptions += "<option>" + designation + "</option>";-->
+<!--                }-->
+<!--                document.getElementById("categorySelect").innerHTML = citiesOptions;-->
+<!--            }-->
+
+}
+</script>
+    <!--    <a th:href="@{/admin/books}">Back to Book List</a>-->
+</div>
+</body>
+</html>
